@@ -31,9 +31,11 @@ def login():
 
 @server.route("/upload", methods=["POST"])
 def upload():
+    print("Uploading")
     access, err = validate.token(request)
 
     if err:
+        print("validation error")
         return err
 
     access = json.loads(access)
@@ -46,6 +48,7 @@ def upload():
             err = util.upload(f, fs_videos, channel, access)
 
             if err:
+                print("util.upload")
                 return err
 
         return "success!", 200
@@ -74,7 +77,7 @@ def download():
             return send_file(out, download_name=f"{fid_string}.mp3")
         except Exception as err:
             print(err)
-            return "internal server error", 500
+            return "internal server error fs_mp3s.get", 500
 
     return "not authorized", 401
 
