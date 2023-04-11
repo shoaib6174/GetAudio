@@ -31,11 +31,9 @@ def login():
 
 @server.route("/upload", methods=["POST"])
 def upload():
-    print("Uploading")
     access, err = validate.token(request)
 
     if err:
-        print("validation error")
         return err
 
     access = json.loads(access)
@@ -48,8 +46,6 @@ def upload():
             err = util.upload(f, fs_videos, channel, access)
 
             if err:
-                print("upload error from gateway")
-                print("util.upload")
                 return err
 
         return "success!", 200
