@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: converter
-          image: sweasytech/converter
+          image: shoaib6174/converter
           envFrom:
             - configMapRef:
                 name: converter-configmap

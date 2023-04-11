@@ -48,6 +48,7 @@ def upload():
             err = util.upload(f, fs_videos, channel, access)
 
             if err:
+                print("upload error from gateway")
                 print("util.upload")
                 return err
 
