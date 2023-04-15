@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  labels:
+    app: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: acraudioonly.azurecr.io/auth:latest
+          ports:
+            - containerPort: 5000
+          env:
+          - name: MYSQL_HOST
+            value: "mysql-audioonly.mysql.database.azure.com"
+          - name: MYSQL_USER
+            value: "shoaib6174"
+          - name: MYSQL_DB
+            value: "auth"
+          - name: MYSQL_PORT
+            value: "3306"
+          - name: MYSQL_PASSWORD
+            value: "Asd_42526272"
+          - name: JWT_SECRET
+            value: "sarcasm"
+          
+

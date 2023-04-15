@@ -12,6 +12,28 @@ server.config["MYSQL_PASSWORD"] = os.environ.get("MYSQL_PASSWORD")
 server.config["MYSQL_DB"] = os.environ.get("MYSQL_DB")
 server.config["MYSQL_PORT"] = int(os.environ.get("MYSQL_PORT"))
 
+@server.route("/signup", methods=["POST"])
+def signup():
+    auth = request.authorization
+    if not auth:
+        return "missing credentials", 401
+
+    # check db for username and password
+    conn = mysql.connection
+    cur = conn.cursor()
+    try:
+        res = cur.execute(
+            "INSERT INTO user (email, password) VALUES (%s , %s);", (auth.username,auth.password)
+        )
+        conn.commit()
+        res2 = cur.execute(
+            "SELECT * FROM user"
+        )
+        return f"User Created", 200
+    except Exception as err:
+        return f"Couldn't Create User \n {err}" , 403
+
+
 
 @server.route("/login", methods=["POST"])
 def login():
@@ -35,7 +57,7 @@ def login():
         else:
             return createJWT(auth.username, os.environ.get("JWT_SECRET"), True)
     else:
-        return "invalide credentials", 401
+        return f"User Not Found. Invalid Credentials. \n {res}", 401
 
 
 @server.route("/validate", methods=["POST"])

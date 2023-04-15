@@ -1,0 +1,33 @@
+apiVersion: "apps/v1"
+kind: "StatefulSet"
+metadata:
+    name: "mongo-development"
+spec:
+  selector:
+    matchLabels:
+      app: "mongo-development"
+  serviceName: "mongo-development"
+  replicas: 1
+  template:
+    metadata:
+      labels:
+          app: "mongo-development"
+    spec:
+      containers:
+        -
+          name: "mongo-development"
+          image: "acraudioonly.azurecr.io/mongodb:latest"
+          imagePullPolicy: "Always"
+          ports:
+            -
+              containerPort: 27017
+              name: "mongodb"
+
+          volumeMounts: 
+            - 
+              name: "rabbitmq-volume"
+              mountPath: "/var/lib/mongodb"
+      volumes: 
+        - name: rabbitmq-volume
+          persistentVolumeClaim:
+            claimName: rabbitmq-pvc
