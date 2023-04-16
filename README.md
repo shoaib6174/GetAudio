@@ -2,7 +2,7 @@
 
 In this project I have developed the following microservice architecture to extract audio from video-
 
-![image](https://user-images.githubusercontent.com/40586752/232265414-aa2bef38-0ba1-448b-93f8-69e3e38ba850.png)
+![image](https://user-images.githubusercontent.com/40586752/232266615-fb91d8e9-aa5f-4105-aad2-0f51986f5385.png)
 
 Follow the following instruction to extract audio-
 
