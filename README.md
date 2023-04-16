@@ -4,6 +4,8 @@ In this project I have developed the following microservice architecture to extr
 
 ![image](https://user-images.githubusercontent.com/40586752/232266615-fb91d8e9-aa5f-4105-aad2-0f51986f5385.png)
 
+Visit the kubeview - https://rebrand.ly/getAudioArchitecture
+
 Follow the following instruction to extract audio-
 
 ### Signup
